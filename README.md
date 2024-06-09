@@ -3,6 +3,7 @@ A power menu built with GTK4. Works with wayland, supports theming and custom sc
 
 ## Requirements
 Rust v1.76
+
 Cargo v1.76
 
 ## Installation
