@@ -1,0 +1,20 @@
+[package]
+name = "pwrmenu"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[build-dependencies]
+cc = "1.0.92"
+
+[dependencies]
+gtk4 = "0.8.1"
+gdk = {version = "0.1", package = "gdk4"}
+gsk = { git = "https://github.com/gtk-rs/gtk4-rs.git", package = "gsk4" }
+cairo-rs = "0.19.4"
+gio = "0.19.5"
+glib = "0.19.7"
+pango = "0.19.5"
+gdk-wayland = { git = "https://github.com/gtk-rs/gtk4-rs.git", package = "gdk4-wayland" }
+serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
