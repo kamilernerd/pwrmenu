@@ -25,3 +25,25 @@ You can also provide custom screen-lock command in the config file if you're usi
 
 ## Preview
 ![alt text](https://github.com/kamilernerd/pwrmenu/blob/master/Screenshot%20from%202024-06-10%2000-09-09.png?raw=true)
+
+## Other
+You can override the styles as you wish using gtk css https://docs.gtk.org/gtk4/css-properties.html .
+Including each button separately. Simply reference their ID in the css.
+
+Button ids:
+  - lock
+  - logout
+  - hibernate
+  - reboot
+  - shutdown
+
+Example:
+```
+#lock {
+    background-color: red;
+}
+
+#lock:hover {
+    background-color: pink;
+}
+```
