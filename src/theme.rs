@@ -17,7 +17,7 @@ const DEFAULT_STYTLE: &str = "#top {
 }
 
 button:focus {
-    ouline: none;
+    outline: none;
 }
 
 #buttons-wrapper {
