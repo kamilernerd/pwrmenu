@@ -22,3 +22,6 @@ Now run ```pwrmenu```
 When executed for the first time a ```theme.css``` and a ```config.json``` file will be created at ```$HOME/.config/pwrmenu```.
 These files contain the theme which can be modified or turned off in the config file.
 You can also provide custom screen-lock command in the config file if you're using a different screen-locker.
+
+## Preview
+![alt text](https://github.com/kamilernerd/pwrmenu/blob/master/Screenshot%20from%202024-06-10%2000-09-09.png?raw=true)
