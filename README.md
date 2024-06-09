@@ -1,6 +1,5 @@
 ## Pwrmenu
-A power menu build with GTK4. Works with wayland, supports theming and custom
-lock commands.
+A power menu built with GTK4. Works with wayland, supports theming and custom screen locker command.
 
 ## Requirements
 Rust v1.76
