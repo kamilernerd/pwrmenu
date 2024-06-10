@@ -26,12 +26,12 @@ use theme::Theme;
 extern "C" {
     fn sys_reboot() -> c_int;
     fn sys_poweroff() -> c_int;
-    fn sys_hibernate() -> c_int;
+    fn sys_suspend() -> c_int;
     fn sys_logout() -> c_int;
     fn sys_lock(cmd: CString) -> c_int;
 }
 
-const OPTIONS: [&str; 5] = ["lock", "logout", "hibernate", "reboot", "shutdown"];
+const OPTIONS: [&str; 5] = ["lock", "logout", "suspend", "reboot", "shutdown"];
 
 fn main() -> glib::ExitCode {
     let config = Config::new();
@@ -85,16 +85,15 @@ fn build_ui(app: &gtk::Application, config: Config) {
         let conf = config.to_owned();
         btn.connect_clicked(move |_ev| unsafe {
             match String::from(opt).as_str() {
-                "hibernate" => sys_hibernate(),
+                "suspend" => sys_suspend(),
                 "reboot" => sys_reboot(),
                 "shutdown" => sys_poweroff(),
                 "logout" => sys_logout(),
                 "lock" => sys_lock(CString::new(conf.lock_screen()).unwrap()),
                 _ => 0,
             };
-            return ();
+            std::process::exit(0);
         });
-
         btns.push(btn);
     }
 

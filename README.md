@@ -38,7 +38,7 @@ Including each button separately. Simply reference their ID in the css.
 Button ids:
   - lock
   - logout
-  - hibernate
+  - suspend
   - reboot
   - shutdown
 
