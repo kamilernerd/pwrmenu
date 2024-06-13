@@ -6,6 +6,13 @@ Rust v1.76
 
 Cargo v1.76
 
+## Dependencies (Make sure they are dev libraries)
+gtk4
+gio
+cairo
+pango
+gdk-pixbuf
+
 ## Installation
 Clone the project
 ```git clone git@github.com:kamilernerd/pwrmenu.git```
