@@ -137,7 +137,7 @@ fn build_ui(app: &gtk::Application, config: Config) {
     window.present();
 }
 
-// Why can't people just make nice apis for underlying functionality?
+// Get current display's geometry
 fn get_active_monitor_geometry() -> GdkRectangle {
     unsafe {
         let disp = gdk_display_get_default();
