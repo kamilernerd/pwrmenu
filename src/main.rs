@@ -21,6 +21,7 @@ use gtk4::prelude::ButtonExt;
 use gtk4::prelude::GtkApplicationExt;
 use gtk4::prelude::GtkWindowExt;
 use gtk4::prelude::WidgetExt;
+use gtk4_layer_shell::{Edge, Layer, LayerShell};
 use theme::Theme;
 
 extern "C" {
@@ -63,6 +64,23 @@ fn build_ui(app: &gtk::Application, config: Config) {
         .show_menubar(false)
         .name("top")
         .build();
+
+    window.init_layer_shell();
+    window.set_layer(Layer::Overlay);
+    window.exclusive_zone();
+
+    window.set_keyboard_mode(gtk4_layer_shell::KeyboardMode::Exclusive);
+
+    let anchor_edges = [
+        (Edge::Left, true),
+        (Edge::Right, true),
+        (Edge::Top, false),
+        (Edge::Bottom, true),
+    ];
+
+    for (anchor, state) in anchor_edges {
+        window.set_anchor(anchor, state);
+    }
 
     let button_wrapper = Box::builder().orientation(Orientation::Horizontal).build();
     button_wrapper.set_halign(gtk::Align::Center);
@@ -116,7 +134,6 @@ fn build_ui(app: &gtk::Application, config: Config) {
     });
 
     window.add_controller(event_controller);
-
     window.present();
 }
 
