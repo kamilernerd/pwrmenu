@@ -11,10 +11,6 @@ int sys_reboot() { return reboot(RB_AUTOBOOT); }
 int sys_poweroff() { return reboot(RB_POWER_OFF); }
 
 int sys_suspend() {
-  // Alternative that works but get instantly woken up, requires root
-	// permissions.
-  // system("echo -n mem > /sys/power/state");
-
   char *newargv[] = {"/usr/bin/systemctl", "suspend", NULL};
   char *newenviron[] = {NULL};
   execve(newargv[0], newargv, newenviron);
@@ -25,7 +21,6 @@ int sys_suspend() {
 }
 
 int sys_logout() {
-  // system("kill -9 -1");
   system("loginctl terminate-user $USER");
   return 0;
 }
