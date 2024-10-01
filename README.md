@@ -12,6 +12,8 @@ gio
 cairo
 pango
 gdk-pixbuf
+atk
+rust-atk
 
 ## Installation
 Clone the project
