@@ -4,18 +4,13 @@ A power menu built with GTK4. Works with wayland/xwayland, supports theming and 
 
 ## Requirements
 
-Rust v1.76
+- Rust v1.81
+- Cargo v1.81
 
-Cargo v1.76
+## Development dependencies
 
-## Dependencies (Make sure they are dev libraries)
-- gtk4
-- gio
-- cairo
-- pango
-- gdk-pixbuf
-- atk
-- rust-atk
+- gtk4-devel
+- gtk4-layer-shell-devel
 
 ## Installation
 
@@ -41,6 +36,7 @@ These files contain the theme which can be modified or turned off in the config 
 You can also provide custom screen-lock command in the config file if you're using a different screen-locker.
 
 ## Preview
+
 Running on Fedora 40 (Gnome) with Hyprland (xwayland).
 
 ![alt text](https://github.com/kamilernerd/pwrmenu/blob/master/Screenshot%20from%202024-06-10%2000-09-09.png?raw=true)
