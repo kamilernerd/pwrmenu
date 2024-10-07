@@ -72,14 +72,14 @@ fn build_ui(app: &gtk::Application, config: Config) {
     window.set_keyboard_mode(gtk4_layer_shell::KeyboardMode::Exclusive);
 
     let anchor_edges = [
-        (Edge::Left, true),
-        (Edge::Right, true),
-        (Edge::Top, false),
-        (Edge::Bottom, true),
+        ("left", Edge::Left, config.anchor().contains("left")),
+        ("right", Edge::Right, config.anchor().contains("right")),
+        ("top", Edge::Top, config.anchor().contains("top")),
+        ("bottom", Edge::Bottom, config.anchor().contains("bottom")),
     ];
 
-    for (anchor, state) in anchor_edges {
-        window.set_anchor(anchor, state);
+    for (_, edge, state) in anchor_edges {
+        window.set_anchor(edge, state);
     }
 
     let button_wrapper = Box::builder().orientation(Orientation::Horizontal).build();

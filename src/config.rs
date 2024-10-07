@@ -10,11 +10,13 @@ extern crate core;
 pub struct Config {
     use_system_theme: bool,
     lock_screen: String,
+    anchor: String,
 }
 
 const DEFAULT_CONFIG: &str = r#"{
     "use_system_theme": true,
-    "lock_screen": ""
+    "lock_screen": "",
+    "anchor": "left,right,top,bottom"
 }
 "#;
 
@@ -25,12 +27,14 @@ impl Config {
         let mut conf = Config {
             use_system_theme: true,
             lock_screen: "".to_string(),
+            anchor: "left,right,top,bottom".to_string(),
         };
 
         let tmp_conf = conf.read_config_file();
 
         conf.lock_screen = tmp_conf.lock_screen;
         conf.use_system_theme = tmp_conf.use_system_theme;
+        conf.anchor = tmp_conf.anchor;
         conf
     }
 
@@ -42,7 +46,7 @@ impl Config {
         let mut file = File::open(self.get_config_file_path()).unwrap();
         let mut buff = String::new();
         file.read_to_string(&mut buff).unwrap();
-        let conf = serde_json::from_str(&buff).unwrap();
+        let conf = serde_json::from_str(&buff).expect("Invalid configuration");
         conf
     }
 
@@ -77,5 +81,8 @@ impl Config {
     pub fn lock_screen(&self) -> String {
         self.lock_screen.to_string()
     }
-}
 
+    pub fn anchor(&self) -> String {
+        self.anchor.to_string()
+    }
+}
