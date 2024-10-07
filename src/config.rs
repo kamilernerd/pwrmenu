@@ -1,4 +1,5 @@
 use std::{
+    collections::HashMap,
     env,
     fs::{self, File},
     io::Read,
@@ -10,13 +11,18 @@ extern crate core;
 pub struct Config {
     use_system_theme: bool,
     lock_screen: String,
-    anchor: String,
+    anchor: HashMap<String, bool>,
 }
 
 const DEFAULT_CONFIG: &str = r#"{
     "use_system_theme": true,
     "lock_screen": "",
-    "anchor": "left,right,top,bottom"
+    "anchor": {
+        "left": true,
+        "right": true,
+        "top": false,
+        "bottom": true
+    }
 }
 "#;
 
@@ -27,7 +33,12 @@ impl Config {
         let mut conf = Config {
             use_system_theme: true,
             lock_screen: "".to_string(),
-            anchor: "left,right,top,bottom".to_string(),
+            anchor: HashMap::from([
+                ("left".to_owned(), true),
+                ("right".to_owned(), true),
+                ("top".to_owned(), false),
+                ("bottom".to_owned(), true),
+            ]),
         };
 
         let tmp_conf = conf.read_config_file();
@@ -82,7 +93,7 @@ impl Config {
         self.lock_screen.to_string()
     }
 
-    pub fn anchor(&self) -> String {
-        self.anchor.to_string()
+    pub fn anchor(&self) -> HashMap<String, bool> {
+        self.anchor.clone()
     }
 }
