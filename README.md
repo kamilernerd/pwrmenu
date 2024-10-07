@@ -45,8 +45,7 @@ Running on Fedora 40 (Gnome) with Hyprland (xwayland).
 
 ```
 {
-    "use_system_theme": true,          // Use default system theme or allow for
-theme.css to override
+    "use_system_theme": true,          // Use default system theme or allow for theme.css to override
     "lock_screen": "",                 // Custom command to trigger lock-screen
     "buttons_layout": {
         "orientation": "horizontal",   // horizontal | vertical
