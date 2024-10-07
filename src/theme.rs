@@ -12,27 +12,31 @@ pub struct Theme {
     display: gtk4::gdk::Display,
 }
 
-const DEFAULT_STYTLE: &str = "#top {
-    background-color: rgba(22,22,22,0.96);
+const DEFAULT_STYLE: &str = "#top {
+	background-color: rgba(22, 22, 22, 0.96);
 }
 
 button:focus {
-    outline: none;
+	outline: none;
 }
 
 #buttons-wrapper {
-    background-color: rgba(22,22,22,1);
+
+	background-color: transparent;
 }
 
-#buttons-wrapper > button {
-    border-radius: 1rem;
-    border: 2px solid rgba(238, 83, 150, 0.5);
-    background-color: rgba(36,36,36,0.5);
+#buttons-wrapper>button {
+	border-radius: 1rem;
+	border: 2px solid rgba(238, 83, 150, 0.5);
+	background-color: rgba(36, 36, 36, 0.5);
+	min-width: 150px;
+	min-height: 150px;
+	margin: 12px;
 }
 
-#buttons-wrapper > button:hover {
-    background-color: rgba(36,36,36,1);
-    border: 2px solid rgba(238, 83, 150, 1);
+#buttons-wrapper>button:hover {
+	background-color: rgba(36, 36, 36, 1);
+	border: 2px solid rgba(238, 83, 150, 1);
 }
 ";
 
@@ -41,7 +45,7 @@ const THEME_PATH: &str = "/.config/pwrmenu/theme.css";
 impl Theme {
     pub fn new(display: gtk4::gdk::Display) -> Theme {
         Theme {
-            theme_css: DEFAULT_STYTLE.to_string(),
+            theme_css: DEFAULT_STYLE.to_string(),
             display,
         }
     }

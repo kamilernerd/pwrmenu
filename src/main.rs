@@ -54,11 +54,11 @@ fn main() -> glib::ExitCode {
 }
 
 fn build_ui(app: &gtk::Application, config: Config) {
-    let geometry = get_active_monitor_geometry();
+    let (width, height) = window_size_from_config(config.get_size());
     let window = ApplicationWindow::builder()
         .application(app)
-        .default_width(geometry.width)
-        .default_height(geometry.height)
+        .default_width(width)
+        .default_height(height)
         .decorated(false)
         .resizable(false)
         .show_menubar(false)
@@ -78,7 +78,7 @@ fn build_ui(app: &gtk::Application, config: Config) {
         ("bottom", Edge::Bottom),
     ];
 
-    let anchors = config.anchor().to_owned();
+    let anchors = config.get_anchor().to_owned();
     for (edge, edge_enum) in edge_map {
         window.set_anchor(edge_enum, anchors[edge])
     }
@@ -92,12 +92,6 @@ fn build_ui(app: &gtk::Application, config: Config) {
     for opt in OPTIONS {
         let btn = Button::builder()
             .label(opt.to_string())
-            .margin_top(12)
-            .margin_bottom(12)
-            .margin_start(12)
-            .margin_end(12)
-            .height_request(150)
-            .width_request(150)
             .name(opt.to_string())
             .build();
 
@@ -108,7 +102,7 @@ fn build_ui(app: &gtk::Application, config: Config) {
                 "reboot" => sys_reboot(),
                 "shutdown" => sys_poweroff(),
                 "logout" => sys_logout(),
-                "lock" => sys_lock(CString::new(conf.lock_screen()).unwrap()),
+                "lock" => sys_lock(CString::new(conf.get_lock_screen()).unwrap()),
                 _ => 0,
             };
             std::process::exit(0);
@@ -155,4 +149,32 @@ fn get_active_monitor_geometry() -> GdkRectangle {
         gdk_monitor_get_geometry(monitor, geo as *mut GdkRectangle);
         return geo.as_ref().unwrap().to_owned();
     }
+}
+
+fn window_size_from_config(size: std::collections::HashMap<String, String>) -> (i32, i32) {
+    let screen = get_active_monitor_geometry();
+    let mut width = screen.width;
+    let mut height = screen.height;
+
+    if size.get("width").unwrap() == "screen" {
+        width = screen.width;
+    } else {
+        width = size
+            .get("width")
+            .unwrap()
+            .parse::<i32>()
+            .expect("Invalid value width");
+    }
+
+    if size.get("height").unwrap() == "screen" {
+        height = screen.height;
+    } else {
+        height = size
+            .get("height")
+            .unwrap()
+            .parse::<i32>()
+            .expect("Invalid value height");
+    }
+
+    return (width, height);
 }

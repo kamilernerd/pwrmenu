@@ -12,6 +12,7 @@ pub struct Config {
     use_system_theme: bool,
     lock_screen: String,
     anchor: HashMap<String, bool>,
+    size: HashMap<String, String>,
 }
 
 const DEFAULT_CONFIG: &str = r#"{
@@ -22,6 +23,10 @@ const DEFAULT_CONFIG: &str = r#"{
         "right": true,
         "top": false,
         "bottom": true
+    },
+    "size": {
+        "width": "500",
+        "height": "300"
     }
 }
 "#;
@@ -39,6 +44,10 @@ impl Config {
                 ("top".to_owned(), false),
                 ("bottom".to_owned(), true),
             ]),
+            size: HashMap::from([
+                ("width".to_owned(), "400".to_owned()),
+                ("height".to_owned(), "400".to_owned()),
+            ]),
         };
 
         let tmp_conf = conf.read_config_file();
@@ -46,6 +55,7 @@ impl Config {
         conf.lock_screen = tmp_conf.lock_screen;
         conf.use_system_theme = tmp_conf.use_system_theme;
         conf.anchor = tmp_conf.anchor;
+        conf.size = tmp_conf.size;
         conf
     }
 
@@ -89,11 +99,15 @@ impl Config {
         self.use_system_theme
     }
 
-    pub fn lock_screen(&self) -> String {
+    pub fn get_lock_screen(&self) -> String {
         self.lock_screen.to_string()
     }
 
-    pub fn anchor(&self) -> HashMap<String, bool> {
+    pub fn get_anchor(&self) -> HashMap<String, bool> {
         self.anchor.clone()
+    }
+
+    pub fn get_size(&self) -> HashMap<String, String> {
+        self.size.clone()
     }
 }
