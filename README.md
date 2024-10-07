@@ -41,7 +41,33 @@ Running on Fedora 40 (Gnome) with Hyprland (xwayland).
 
 ![alt text](https://github.com/kamilernerd/pwrmenu/blob/master/Screenshot%20from%202024-06-10%2000-09-09.png?raw=true)
 
-## Other
+## Options
+
+```
+{
+    "use_system_theme": true,          // Use default system theme or allow for
+theme.css to override
+    "lock_screen": "",                 // Custom command to trigger lock-screen
+    "buttons_layout": {
+        "orientation": "horizontal",   // horizontal | vertical
+        "vertical_align": "center",    // start | end | center | baseline
+        "horizontal_align": "center"   // start | end | center | baseline
+    },
+    "anchor": {
+        "left": true,                  // anchor window to left
+        "right": true,                 // anchor window to right
+        "top": false,                  // anchor window to top
+        "bottom": true                 // anchor window to bottom
+    },
+    "size": {
+        "width": "500",                // "number" | "screen" uses screen width
+        "height": "300"                // "number" | "screen" uses screen
+height
+    }
+}
+```
+
+## Theming
 
 You can override the styles as you wish using gtk css https://docs.gtk.org/gtk4/css-properties.html .
 Including each button separately. Simply reference their ID in the css.
