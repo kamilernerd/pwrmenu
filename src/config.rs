@@ -11,6 +11,7 @@ extern crate core;
 pub struct Config {
     use_system_theme: bool,
     lock_screen: String,
+    buttons_layout: HashMap<String, String>,
     anchor: HashMap<String, bool>,
     size: HashMap<String, String>,
 }
@@ -18,6 +19,11 @@ pub struct Config {
 const DEFAULT_CONFIG: &str = r#"{
     "use_system_theme": true,
     "lock_screen": "",
+    "buttons_layout": {
+        "orientation": "horizontal",
+        "vertical_align": "center",
+        "horizontal_align": "center"
+    },
     "anchor": {
         "left": true,
         "right": true,
@@ -38,6 +44,11 @@ impl Config {
         let mut conf = Config {
             use_system_theme: true,
             lock_screen: "".to_string(),
+            buttons_layout: HashMap::from([
+                ("orientation".to_string(), "horizontal".to_owned()),
+                ("vertical_align".to_string(), "center".to_owned()),
+                ("horizontal_align".to_string(), "center".to_owned()),
+            ]),
             anchor: HashMap::from([
                 ("left".to_owned(), true),
                 ("right".to_owned(), true),
@@ -54,6 +65,7 @@ impl Config {
 
         conf.lock_screen = tmp_conf.lock_screen;
         conf.use_system_theme = tmp_conf.use_system_theme;
+        conf.buttons_layout = tmp_conf.buttons_layout;
         conf.anchor = tmp_conf.anchor;
         conf.size = tmp_conf.size;
         conf
@@ -109,5 +121,27 @@ impl Config {
 
     pub fn get_size(&self) -> HashMap<String, String> {
         self.size.clone()
+    }
+
+    pub fn get_buttons_layout(&self) -> HashMap<String, String> {
+        self.buttons_layout.clone()
+    }
+
+    pub fn get_buttons_orientation(&self) -> String {
+        self.buttons_layout["orientation"].to_owned()
+    }
+
+    pub fn get_buttons_valign(&self) -> String {
+        if !self.buttons_layout.contains_key("vertical_align") {
+            return "center".to_owned();
+        }
+        self.buttons_layout["vertical_align"].to_owned()
+    }
+
+    pub fn get_buttons_halign(&self) -> String {
+        if !self.buttons_layout.contains_key("horizontal_align") {
+            return "center".to_owned();
+        }
+        self.buttons_layout["horizontal_align"].to_owned()
     }
 }

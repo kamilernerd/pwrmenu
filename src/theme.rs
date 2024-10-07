@@ -21,7 +21,6 @@ button:focus {
 }
 
 #buttons-wrapper {
-
 	background-color: transparent;
 }
 

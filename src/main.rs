@@ -21,6 +21,7 @@ use gtk4::prelude::ButtonExt;
 use gtk4::prelude::GtkApplicationExt;
 use gtk4::prelude::GtkWindowExt;
 use gtk4::prelude::WidgetExt;
+use gtk4::Align;
 use gtk4_layer_shell::{Edge, Layer, LayerShell};
 use theme::Theme;
 
@@ -83,9 +84,13 @@ fn build_ui(app: &gtk::Application, config: Config) {
         window.set_anchor(edge_enum, anchors[edge])
     }
 
-    let button_wrapper = Box::builder().orientation(Orientation::Horizontal).build();
-    button_wrapper.set_halign(gtk::Align::Center);
-    button_wrapper.set_valign(gtk::Align::Center);
+    let button_wrapper = Box::builder()
+        .orientation(widget_orientation_from_config(
+            config.get_buttons_orientation(),
+        ))
+        .build();
+    button_wrapper.set_halign(widget_align_from_config(config.get_buttons_halign()));
+    button_wrapper.set_valign(widget_align_from_config(config.get_buttons_valign()));
     button_wrapper.set_widget_name("buttons-wrapper");
 
     let mut btns: Vec<Button> = vec![];
@@ -177,4 +182,29 @@ fn window_size_from_config(size: std::collections::HashMap<String, String>) -> (
     }
 
     return (width, height);
+}
+
+fn widget_orientation_from_config(orientation: String) -> Orientation {
+    if orientation == "vertical" {
+        return gtk4::Orientation::Vertical;
+    } else if orientation == "horizontal" {
+        return gtk4::Orientation::Horizontal;
+    }
+
+    return gtk4::Orientation::Horizontal;
+}
+
+fn widget_align_from_config(align: String) -> Align {
+    if align == "fill" {
+        return Align::Fill;
+    } else if align == "start" {
+        return Align::Start;
+    } else if align == "end" {
+        return Align::End;
+    } else if align == "center" {
+        return Align::Center;
+    } else if align == "baseline" {
+        return Align::Baseline;
+    }
+    return Align::Center;
 }
