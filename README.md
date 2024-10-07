@@ -60,8 +60,7 @@ Running on Fedora 40 (Gnome) with Hyprland (xwayland).
     },
     "size": {
         "width": "500",                // "number" | "screen" uses screen width
-        "height": "300"                // "number" | "screen" uses screen
-height
+        "height": "300"                // "number" | "screen" uses screen height
     }
 }
 ```
